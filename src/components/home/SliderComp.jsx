@@ -3,9 +3,8 @@ import Slider from "react-slick";
 
 const SliderComp = () => {
   const settings = {
-    // dots: true,
+    dots: true,
     infinite: true,
-    autoplay:true,
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
@@ -13,7 +12,7 @@ const SliderComp = () => {
   return (
     <div className="py-6 bg-gray-100 p-6 px-4">
       <Slider {...settings}>
-        <div className="!flex items-center justify-center">
+        <div className="!flex items-center justify-center px-4">
           <div>
             <h1 className="text-4xl font-bold py-8">En Kaliteli Ayakkabılar Burada</h1>
             <p>

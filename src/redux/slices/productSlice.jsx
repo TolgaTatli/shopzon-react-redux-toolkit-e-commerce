@@ -35,6 +35,18 @@ const productSlice = createSlice({
       })
       .addCase(getProducts.rejected, (state) => {
         state.productStatus = STATUS.FAIL;
+      })
+      .addCase(getDetailProduct.pending, (state) => {
+        state.productDetailStatus = STATUS.LOADING;
+      })
+      .addCase(getDetailProduct.fulfilled, (state, action) => {
+        state.productDetailStatus = STATUS.SUCCESS;
+        state.productDetails = action.payload;
+      })
+      .addCase(getDetailProduct.rejected, (state) => {
+        state.productDetailStatus = STATUS.FAIL;
       });
   },
 });
+
+export default productSlice.reducer;
