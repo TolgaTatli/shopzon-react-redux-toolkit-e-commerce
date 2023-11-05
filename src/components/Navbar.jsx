@@ -6,11 +6,11 @@ import { SlBasket } from "react-icons/sl";
 const Navbar = () => {
   return (
     // Main Navbar
-    <div className="flex justify-between items-center my-2">
+    <div className="flex justify-between items-center my-2 shadow-xl shadow-slate-200 py-2">
       {/* Left Navbar */}
-      <div className="text-6xl">Shopzon</div>
+      <div className="text-6xl mx-12">Shopzon</div>
       {/* Right Navbar */}
-      <div className="flex items-center gap-8">
+      <div className="flex items-center gap-8 mx-12">
         <div className="flex items-center border
         p-3 rounded-full bg-gray-100">
           <input className="bg-gray-100 outline-none" type="text" placeholder="Arama Yapınız..." />
