@@ -10,8 +10,7 @@ import { useNavigate } from "react-router-dom";
 const Navbar = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { carts } = useSelector((state) => state.carts);
-  console.log(carts);
+  const { itemCount } = useSelector((state) => state.carts);
 
   useEffect(() => {
     dispatch(getCartTotal());
@@ -41,7 +40,7 @@ const Navbar = () => {
             className="absolute -top-3 -right-3 bg-red-500
           text-white rounded-full w-5 h-5 flex items-center justify-center "
           >
-            {carts?.length}
+            {itemCount}
           </div>
           <SlBasket size={28} className="cursor-pointer" />
         </div>
