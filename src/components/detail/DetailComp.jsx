@@ -1,7 +1,11 @@
 import React from "react";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../../redux/slices/cartSlice";
 
 const DetailComp = ({ productDetail }) => {
+  const dispatch = useDispatch();
+
   const [quantity, setQuantity] = useState(0);
   const decrement = () => {
     if (quantity > 0) setQuantity(quantity - 1);
@@ -10,8 +14,16 @@ const DetailComp = ({ productDetail }) => {
     if (quantity < productDetail?.rating.count) setQuantity(quantity + 1);
   };
   const addBasket = () => {
-    
-  }
+    dispatch(
+      addToCart({
+        id: productDetail?.id,
+        title: productDetail?.title,
+        image: productDetail?.image,
+        quantity: quantity,
+        price: productDetail?.price,
+      })
+    );
+  };
 
   return (
     <div className="flex gap-10 my-10">
@@ -23,9 +35,9 @@ const DetailComp = ({ productDetail }) => {
         <div className="text-4xl font-bold">{productDetail?.title}</div>
         <div className="my-2">{productDetail?.description}</div>
         <div className="text-red-500 text-lg">
-          Rating : {productDetail?.rating.rate}
+          {/* Rating : {productDetail?.rating.rate} */}
         </div>
-        <div>Count : {productDetail?.rating.count}</div>
+        {/* <div>Count : {productDetail?.rating.count}</div> */}
         <div className="text-4xl font-extrabold text-green-600">
           {productDetail?.price} <span className="text-sm">TL</span>
         </div>
