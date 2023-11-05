@@ -19,15 +19,14 @@ const Cart = () => {
     <div>
       {carts?.length > 0 ? (
         <div>
-          {carts?.map((cart,i)=> (
-            <CartComp key={i} cart={cart}/>
+          {carts?.map((cart, i) => (
+            <CartComp key={i} cart={cart} />
           ))}
-          <div className="flex ">Toplam Tutar : <span> {totalAmount} TL </span></div>
-
-          
+          <div className="flex justify-end text-xl font-bold ">TOPLAM TUTAR: <span className="text-green-600 text-2xl ml-2">{totalAmount} TL </span>
+          </div>
         </div>
       ) : (
-        <div>Kartınız boş...</div>
+        <div>Kartınız boş...</div>  
       )}
     </div>
   );
