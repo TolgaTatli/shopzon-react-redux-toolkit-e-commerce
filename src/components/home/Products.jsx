@@ -1,24 +1,22 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getProducts } from "../../redux/slices/productSlice";
+import {
+  getCategoryProduct,
+  getProducts,
+} from "../../redux/slices/productSlice";
 import Loading from "../Loading";
 import Product from "./Product";
 import ReactPaginate from "react-paginate";
 
-const Products = () => {
+const Products = ({ category, sort }) => {
+  console.log(sort);
   const dispatch = useDispatch();
   const { products, productStatus } = useSelector(
     (state) => state.products
   ); /* state.products olma sebebi storeda products olarak tanımlamamız ve
   productSlice içindeki products ve productStatus ile aynı ismi vererek destruct etmiş oluruz. */
-
-  useEffect(() => {
-    dispatch(getProducts());
-  }, []);
-
   const [itemOffset, setItemOffset] = useState(0);
-
   // Simulate fetching items from another resources.
   // (This could be items from props; or items loaded in a local state
   // from an API endpoint with useEffect and useState)
@@ -35,6 +33,14 @@ const Products = () => {
     );
     setItemOffset(newOffset);
   };
+
+  useEffect(() => {
+    if (category) {
+      dispatch(getCategoryProduct(category));
+    } else {
+      dispatch(getProducts());
+    }
+  }, [dispatch, category]);
   return (
     <div>
       {productStatus == "LOADING" ? (
@@ -42,9 +48,13 @@ const Products = () => {
       ) : (
         <>
           <div className="flex flex-wrap justify-center items-center">
-            {currentItems?.map((product, index) => (
-              <Product key={index} product={product} />
-            ))}
+            {currentItems
+              ?.sort((a, b) =>
+                sort === "inc" ? a.price - b.price : sort === "dec" ? b.price - a.price : null
+              )
+              ?.map((product, index) => (
+                <Product key={index} product={product} />
+              ))}
           </div>
           <ReactPaginate
             className="paginate"
